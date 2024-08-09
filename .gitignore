@@ -36,8 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/resources/application-dev.yml
-src/main/resources/application-main.yml
+src/main/resources/application-dev.yaml
+src/main/resources/application-main.yaml
 src/main/resources/keystore.p12
 
 src/test/resources/application.yml
