@@ -5,10 +5,13 @@ import com.example.mssaembackendv2.domain.badge.BadgeEnum;
 import com.example.mssaembackendv2.domain.badge.BadgeService;
 import com.example.mssaembackendv2.domain.chatroom.ChatRoom;
 import com.example.mssaembackendv2.domain.chatroom.ChatRoomRepository;
+import com.example.mssaembackendv2.domain.dynamoChatConnections.ChatConnection;
+import com.example.mssaembackendv2.domain.dynamoChatConnections.ChatConnectionService;
 import com.example.mssaembackendv2.domain.evaluation.dto.EvaluationRequestDto.EvaluationInfo;
 import com.example.mssaembackendv2.domain.evaluation.dto.EvaluationResultDto.EvaluationCount;
 import com.example.mssaembackendv2.domain.evaluation.dto.EvaluationResultDto.EvaluationResult;
 import com.example.mssaembackendv2.domain.member.Member;
+import com.example.mssaembackendv2.domain.member.MemberRepository;
 import com.example.mssaembackendv2.domain.notification.NotificationService;
 import com.example.mssaembackendv2.domain.notification.NotificationType;
 import com.example.mssaembackendv2.domain.worryboard.WorryBoard;
@@ -30,6 +33,8 @@ public class EvaluationService {
     private final BadgeService badgeService;
     private final NotificationService notificationService;
     private final ChatRoomRepository chatRoomRepository;
+    private final ChatConnectionService chatConnectionService;
+    private final MemberRepository memberRepository;
 
     /**
      * 평가 추가 하기
@@ -58,11 +63,23 @@ public class EvaluationService {
             }
         });
 
-//        String result = Arrays.stream(checks).collect(Collectors.joining());
-//        evaluationRepository.save(new Evaluation(worryBoard, partner, result));
-//
-//        // Badge추가 및 알림 추가
-//        insertBadgeAndNotification(partner);
+        List<ChatConnection> connectionsByChatRoomId = chatConnectionService.getConnectionsByChatRoomId(String.valueOf(chatRoom.getId()));
+        Long partnerId = 0L;
+
+        for (ChatConnection chatConnection : connectionsByChatRoomId) {
+            if(!chatConnection.getMemberId().equals(member.getId())) {
+                partnerId = Long.valueOf(chatConnection.getMemberId());
+                break;
+            }
+        }
+
+        Member partner =  memberRepository.findById(partnerId).orElseThrow();
+
+        String result = Arrays.stream(checks).collect(Collectors.joining());
+        evaluationRepository.save(new Evaluation(worryBoard, partner, result));
+
+        // Badge추가 및 알림 추가
+        insertBadgeAndNotification(partner);
         return "펑가 완료";
     }
 
