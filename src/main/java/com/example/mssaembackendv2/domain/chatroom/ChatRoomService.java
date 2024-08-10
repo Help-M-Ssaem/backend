@@ -3,7 +3,6 @@ package com.example.mssaembackendv2.domain.chatroom;
 import com.example.mssaembackendv2.domain.member.Member;
 import com.example.mssaembackendv2.domain.worryboard.WorryBoard;
 import com.example.mssaembackendv2.domain.worryboard.WorryBoardRepository;
-import com.example.mssaembackendv2.domain.worryboard.WorryBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
