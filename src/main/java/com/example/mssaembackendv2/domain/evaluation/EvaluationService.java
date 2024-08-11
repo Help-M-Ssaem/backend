@@ -87,7 +87,7 @@ public class EvaluationService {
      * Badge 추가 및 알림 추가
      */
     public void insertBadgeAndNotification(Member partner) {
-        EvaluationCount evaluationCount = countEvaluation(partner);
+        EvaluationCount evaluationCount = countEvaluation(partner.getId());
         boolean check = true;
         if (badgeService.existBadgeStateTrue(partner)) {
             check = false;

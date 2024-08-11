@@ -157,7 +157,7 @@ public class MemberService {
         return MemberProfileInfo.builder()
                 .teacherInfo(new TeacherInfo(member))
                 .badgeInfos(badgeService.findAllBadge(member))
-                .evaluationCount(evaluationService.countEvaluation(member))
+                .evaluationCount(evaluationService.countEvaluation(memberId))
                 .boardHistory(boardService.getBoardHistory(member))
                 .discussionHistory(discussionService.getDiscussionHistory(member))
                 .worryBoardHistory(worryBoardService.getWorryBoardHistory(member))
