@@ -38,6 +38,6 @@ out/
 
 src/main/resources/application-dev.yaml
 src/main/resources/application-main.yaml
-src/main/resources/keystore.p12
+src/main/resources/
 
 src/test/resources/application.yml
