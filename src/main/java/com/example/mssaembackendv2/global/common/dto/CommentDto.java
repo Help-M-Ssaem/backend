@@ -2,6 +2,7 @@ package com.example.mssaembackendv2.global.common.dto;
 
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberSimpleInfo;
 import com.example.mssaembackendv2.global.common.Comment;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -74,5 +75,12 @@ public class CommentDto {
             this.isEditAllowed = isEditAllowed;
             this.isLiked = isLiked;
         }
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CommunityTerm {
+        private String content;
     }
 }
