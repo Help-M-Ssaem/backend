@@ -7,12 +7,7 @@ import com.example.mssaembackendv2.domain.member.Member;
 import com.example.mssaembackendv2.global.config.security.auth.CurrentMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -41,8 +36,8 @@ public class EvaluationController {
    * 자신이 받은 평가 count
    */
   @GetMapping("/count")
-  public ResponseEntity<EvaluationCount> countEvaluation(@CurrentMember Member member){
-    return ResponseEntity.ok(evaluationService.countEvaluation(member));
+  public ResponseEntity<EvaluationCount> countEvaluation(@RequestParam Long memberId){
+    return ResponseEntity.ok(evaluationService.countEvaluation(memberId));
   }
 
 }

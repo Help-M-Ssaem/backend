@@ -142,7 +142,8 @@ public class EvaluationService {
     /**
      * 자신의 평가 count
      */
-    public EvaluationCount countEvaluation(Member member) {
+    public EvaluationCount countEvaluation(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow();
         List<Evaluation> evaluations = evaluationRepository.findAllByMember(member);
         int[] result = new int[EvaluationEnum.values().length];
         for (Evaluation e : evaluations) {
@@ -155,4 +156,7 @@ public class EvaluationService {
         }
         return new EvaluationCount(result);
     }
+
+
+
 }
