@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/member/evaluations")
 public class EvaluationController {
 
   private final EvaluationService evaluationService;
@@ -19,7 +18,7 @@ public class EvaluationController {
   /**
    * 평가 추가
    */
-  @PostMapping("")
+  @PostMapping("/member/evaluations")
   public ResponseEntity<String> insertEvaluation(@CurrentMember Member member, @RequestBody EvaluationInfo evaluationInfo) {
     return ResponseEntity.ok(evaluationService.insertEvaluation(member, evaluationInfo));
   }
@@ -27,7 +26,7 @@ public class EvaluationController {
   /**
    * 평가 받은 사람의 평가 내용 조회
    */
-  @GetMapping("/{worryBoardId}")
+  @GetMapping("/member/evaluations/{worryBoardId}")
   public ResponseEntity<EvaluationResult> selectEvaluation(@CurrentMember Member member, @PathVariable Long worryBoardId){
     return ResponseEntity.ok(evaluationService.selectEvaluation(member, worryBoardId));
   }
@@ -35,7 +34,7 @@ public class EvaluationController {
   /**
    * 자신이 받은 평가 count
    */
-  @GetMapping("/count")
+  @GetMapping("/evaluations/count")
   public ResponseEntity<EvaluationCount> countEvaluation(@RequestParam Long memberId){
     return ResponseEntity.ok(evaluationService.countEvaluation(memberId));
   }
