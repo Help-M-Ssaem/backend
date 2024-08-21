@@ -4,9 +4,10 @@ import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.CheckNickN
 import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.ModifyProfile;
 import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.RegisterMember;
 import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.SocialLoginToken;
+import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.CheckNickNameRes;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberProfileInfo;
-import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberSimpleInfo;
+import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberInfo;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.TeacherInfo;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.TokenInfo;
 import com.example.mssaembackendv2.global.config.security.auth.CurrentMember;
@@ -101,7 +102,7 @@ public class MemberController {
      * [GET] 로그인한 유저 정보 조회
      */
     @GetMapping("/member/info")
-    public ResponseEntity<MemberSimpleInfo> getCurrentMemberInfo(@CurrentMember Member member) {
+    public ResponseEntity<MemberInfo> getCurrentMemberInfo(@CurrentMember Member member) {
         return new ResponseEntity<>(memberService.getMemberInfo(member), HttpStatus.OK);
     }
 

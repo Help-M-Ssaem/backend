@@ -11,6 +11,8 @@ import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.ModifyProf
 import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.CheckNickName;
 import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.RegisterMember;
 import com.example.mssaembackendv2.domain.member.dto.MemberRequestDto.SocialLoginToken;
+import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto;
+import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberInfo;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberSimpleInfo;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.MemberProfileInfo;
 import com.example.mssaembackendv2.domain.member.dto.MemberResponseDto.CheckNickNameRes;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -174,8 +177,16 @@ public class MemberService {
                 .build();
     }
 
-    public MemberSimpleInfo getMemberInfo(Member member) {
-        return new MemberSimpleInfo(member);
+    public MemberInfo getMemberInfo(Member member) {
+        List<Badge> allByMember = badgeRepository.findAllByMember(member).orElseThrow();
+        Long badgeId = null;
+        for (Badge badge : allByMember) {
+            if(badge.getBadgeEnum().getName().equals(member.getBadgeName())){
+                badgeId = badge.getId();
+                break;
+            }
+        }
+        return new MemberInfo(member, badgeId);
     }
 
     public String deleteProfileImage(Member member) {

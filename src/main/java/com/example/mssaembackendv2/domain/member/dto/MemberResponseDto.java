@@ -45,7 +45,30 @@ public class MemberResponseDto {
             this.profileImgUrl = member.getProfileImageUrl();
             this.introduction = member.getIntroduction();
         }
+    }
 
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MemberInfo {
+
+        private Long id;
+        private String nickName;
+        private String mbti;
+        private String badge;
+        private String profileImgUrl;
+        private String introduction;
+        private Long badgeId;
+
+        public MemberInfo(Member member, Long badgeId) {
+            this.id = member.getId();
+            this.nickName = member.getNickName();
+            this.mbti = member.getDetailMbti();
+            this.badge = member.getBadgeName();
+            this.profileImgUrl = member.getProfileImageUrl();
+            this.introduction = member.getIntroduction();
+            this.badgeId = badgeId;
+        }
     }
 
     @Getter
