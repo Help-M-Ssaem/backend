@@ -194,7 +194,7 @@ public class MemberService {
             String newProfileUrl = s3Service.uploadImage(multipartFile);
             member.changeProfileImageUrl(newProfileUrl);
             save(member);
-            return "프로필 사진 수정 완료";
+            return member.getProfileImageUrl();
         }
         return null;
     }
