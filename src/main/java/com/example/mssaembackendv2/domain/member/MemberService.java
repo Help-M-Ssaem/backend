@@ -147,6 +147,9 @@ public class MemberService {
         // 수정
         member.modifyMember(modifyProfile.getNickName(), modifyProfile.getIntroduction(),
                 modifyProfile.getMbti(), modifyProfile.getCaseSensitivity(), badgeName);
+        if(modifyProfile.getChangeImageUrl() != null) {
+            member.changeProfileImageUrl(modifyProfile.getChangeImageUrl());
+        }
         save(member);
         return "수정 성공";
     }
@@ -192,9 +195,7 @@ public class MemberService {
                 s3Service.deleteFile(s3Service.parseFileName(member.getProfileImageUrl()));
             }
             String newProfileUrl = s3Service.uploadImage(multipartFile);
-            member.changeProfileImageUrl(newProfileUrl);
-            save(member);
-            return member.getProfileImageUrl();
+            return newProfileUrl;
         }
         return null;
     }

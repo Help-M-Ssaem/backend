@@ -48,5 +48,6 @@ public class MemberRequestDto {
         private MbtiEnum mbti;
         private String caseSensitivity;
         private Long badgeId;
+        private String changeImageUrl;
     }
 }
