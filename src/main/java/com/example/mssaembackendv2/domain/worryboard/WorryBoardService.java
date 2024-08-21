@@ -88,7 +88,7 @@ public class WorryBoardService {
             .memberSimpleInfo(
                 new MemberSimpleInfo(member.getId(), member.getNickName(), member.getDetailMbti(),
                     member.getBadgeName(),
-                    member.getProfileImageUrl()))
+                    member.getProfileImageUrl(), member.getIntroduction()))
             .isEditAllowed(isEditAllowed)
             .isChatAllowed(isChatAllowed)
             .chatRoom(chatRoom)
@@ -173,7 +173,8 @@ public class WorryBoardService {
                     solveMember.getId(), solveMember.getNickName(),
                     solveMember.getDetailMbti(),
                     solveMember.getBadgeName(),
-                    solveMember.getProfileImageUrl())
+                    solveMember.getProfileImageUrl(),
+                        solveMember.getIntroduction())
             )
             .worryBoardId(id)
             .writerId(worryBoard.getMember().getId()).build();

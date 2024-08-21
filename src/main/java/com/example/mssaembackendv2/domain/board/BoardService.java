@@ -249,7 +249,8 @@ public class BoardService {
                     board.getMember().getNickName(),
                     board.getMember().getDetailMbti(),
                     board.getMember().getBadgeName(),
-                    board.getMember().getProfileImageUrl()
+                    board.getMember().getProfileImageUrl(),
+                    board.getMember().getIntroduction()
                 )
             )
             .board(board)

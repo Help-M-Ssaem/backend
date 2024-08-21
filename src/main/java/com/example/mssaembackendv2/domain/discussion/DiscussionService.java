@@ -118,7 +118,8 @@ public class DiscussionService {
                         discussion.getMember().getNickName(),
                         discussion.getMember().getDetailMbti(),
                         discussion.getMember().getBadgeName(),
-                        discussion.getMember().getProfileImageUrl()
+                        discussion.getMember().getProfileImageUrl(),
+                        discussion.getMember().getIntroduction()
                     ),
                     selectedOptionIdx != -1
                         ? setDiscussionOptionLoginInfo(discussion.getParticipantCount(),

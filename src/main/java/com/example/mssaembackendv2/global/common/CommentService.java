@@ -83,7 +83,8 @@ public class CommentService {
                     new MemberSimpleInfo(comment.getMember().getId(),
                         comment.getMember().getNickName(), comment.getMember().getDetailMbti(),
                         comment.getMember().getBadgeName(),
-                        comment.getMember().getProfileImageUrl())).build();
+                        comment.getMember().getProfileImageUrl(),
+                            comment.getMember().getIntroduction())).build();
         }).collect(Collectors.toList());
     }
 
@@ -101,7 +102,7 @@ public class CommentService {
                     new MemberSimpleInfo(comment.getMember().getId(),
                         comment.getMember().getNickName(), comment.getMember().getDetailMbti(),
                         comment.getMember().getBadgeName(),
-                        comment.getMember().getProfileImageUrl())).build();
+                        comment.getMember().getProfileImageUrl(), comment.getMember().getIntroduction())).build();
         }).collect(Collectors.toList());
     }
 
