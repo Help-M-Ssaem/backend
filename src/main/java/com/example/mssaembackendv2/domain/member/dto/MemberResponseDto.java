@@ -35,6 +35,7 @@ public class MemberResponseDto {
         private String mbti;
         private String badge;
         private String profileImgUrl;
+        private String introduction;
 
         public MemberSimpleInfo(Member member) {
             this.id = member.getId();
@@ -42,6 +43,7 @@ public class MemberResponseDto {
             this.mbti = member.getDetailMbti();
             this.badge = member.getBadgeName();
             this.profileImgUrl = member.getProfileImageUrl();
+            this.introduction = member.getIntroduction();
         }
 
     }
