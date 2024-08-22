@@ -83,15 +83,27 @@ public class Member extends BaseTimeEntity {
 
     public void modifyMember(String nickName, String introduction, MbtiEnum mbti,
                              String caseSensitivity, String badgeName) {
-        // MBTI 변경 시 프로필 사진이 디폴트라면 프로필 사진도 같이 변경
-        this.mbti = mbti;
-        if (this.defaultProfile) {
-            this.profileImageUrl = mbti.getProfileUrl();
+        // MBTI가 null이 아닐 때만 업데이트
+        if (mbti != null) {
+            this.mbti = mbti;
+            // MBTI 변경 시 프로필 사진이 디폴트라면 프로필 사진도 같이 변경
+            if (this.defaultProfile) {
+                this.profileImageUrl = mbti.getProfileUrl();
+            }
         }
-        this.nickName = nickName;
-        this.introduction = introduction;
-        this.caseSensitivity = caseSensitivity;
-        this.badgeName = badgeName;
+        // 각 값이 null이 아닐 때만 업데이트
+        if (nickName != null) {
+            this.nickName = nickName;
+        }
+        if (introduction != null) {
+            this.introduction = introduction;
+        }
+        if (caseSensitivity != null) {
+            this.caseSensitivity = caseSensitivity;
+        }
+        if (badgeName != null) {
+            this.badgeName = badgeName;
+        }
     }
 
     public void increaseReport() {

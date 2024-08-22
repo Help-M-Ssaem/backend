@@ -38,7 +38,7 @@ public class BadgeService {
     /**
      * member와 바꾸려는 대표 뱃지로 바꾸려는 badgeId를 받아서 유효성 검사 후 바꿔주는 함수
      */
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public String changeRepresentativeBadge(Member member, Long badgeId) {
         if (badgeId != null) {
             // 새로운 뱃지 받아오기, 멤버가 획득한 뱃지가 맞는지 유효성 검사
