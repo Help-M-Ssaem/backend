@@ -212,8 +212,7 @@ public class MemberService {
     }
 
     public String deleteFile(String imageUrl) {
-        s3Service.deleteFile(imageUrl);
-
+        s3Service.deleteFile(s3Service.parseFileName(imageUrl));
         return "삭제 완료";
     }
 }
