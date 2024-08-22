@@ -18,14 +18,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
@@ -122,6 +115,11 @@ public class MemberController {
     @DeleteMapping("/member/profile")
     public ResponseEntity<String> deleteProfileImage(@CurrentMember Member member) {
         return new ResponseEntity<>(memberService.deleteProfileImage(member), HttpStatus.OK);
+    }
+
+    @PostMapping("/member/s3/file")
+    public ResponseEntity<String> deleteS3File(@RequestParam String imageUrl) {
+        return new ResponseEntity<>(memberService.deleteFile(imageUrl), HttpStatus.OK);
     }
 
 }

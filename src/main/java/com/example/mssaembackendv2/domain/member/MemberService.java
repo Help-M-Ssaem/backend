@@ -210,4 +210,10 @@ public class MemberService {
         }
         return null;
     }
+
+    public String deleteFile(String imageUrl) {
+        s3Service.deleteFile(imageUrl);
+
+        return "삭제 완료";
+    }
 }
