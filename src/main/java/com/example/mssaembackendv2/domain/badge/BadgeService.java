@@ -54,7 +54,7 @@ public class BadgeService {
             newBadge.changeStateTrue();
             return newBadge.getBadgeEnum().getName();
         }
-        return null;
+        return member.getBadgeName();
     }
 
     public void insertBadge(Badge badge) {
