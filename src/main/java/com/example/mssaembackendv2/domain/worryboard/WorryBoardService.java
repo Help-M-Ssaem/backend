@@ -75,9 +75,6 @@ public class WorryBoardService {
         Boolean isChatAllowed = (viewer != null && viewer.getMbti()
             .equals(worryBoard.getTargetMbti()));
 
-        //채팅방 Id 조회
-        ChatRoom chatRoom = chatRoomRepository.findChatRoomByWorryBoard(worryBoard);
-
         //고민글 상세 조회 시 조회수 상승
         worryBoard.increaseHits();
 
@@ -91,7 +88,6 @@ public class WorryBoardService {
                     member.getProfileImageUrl(), member.getIntroduction()))
             .isEditAllowed(isEditAllowed)
             .isChatAllowed(isChatAllowed)
-            .chatRoom(chatRoom)
             .build();
     }
 
