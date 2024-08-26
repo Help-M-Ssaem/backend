@@ -14,6 +14,9 @@ public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
 
+    /**
+     * 채팅방 생성
+     */
     @PostMapping("/chatroom")
     public ResponseEntity<Long> createChatRoom(@CurrentMember Member member, @RequestParam Long worryBoardId){
         return ResponseEntity.ok(chatRoomService.createChatRoom(member, worryBoardId));
