@@ -21,4 +21,8 @@ public class ChatRoomController {
     public ResponseEntity<Long> createChatRoom(@CurrentMember Member member, @RequestParam Long worryBoardId){
         return ResponseEntity.ok(chatRoomService.createChatRoom(member, worryBoardId));
     }
+
+    /**
+     * 채팅방 삭제
+     */
 }
