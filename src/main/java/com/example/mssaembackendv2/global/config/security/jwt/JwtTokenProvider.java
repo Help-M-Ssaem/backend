@@ -42,36 +42,40 @@ public class JwtTokenProvider {
     }
 
     public String generateAccessToken(Long memberId) {
-        Claims claims = Jwts.claims();
-        claims.put("memberId", memberId);
-
         Date now = new Date();
         Date accessTokenExpirationTime = new Date(now.getTime() + TOKEN_VALID_TIME);
 
         return Jwts.builder()
-                .setClaims(claims)
+                .setClaims(setClaims(memberId))
                 .setIssuedAt(now) // 토큰 발행 시간 정보
                 .setExpiration(accessTokenExpirationTime)
                 .signWith(SignatureAlgorithm.HS256, jwtSecretKey)
                 .compact();
     }
 
-    public MemberResponseDto.TokenInfo generateToken(Long memberId) {
-        Claims claims = Jwts.claims();
-        claims.put("memberId", memberId);
-
+    public String generateRefreshToken(Long memberId) {
         Date now = new Date();
         Date refreshTokenExpirationTime = new Date(now.getTime() + REF_TOKEN_VALID_TIME);
 
-        String accessToken = generateAccessToken(memberId);
-        String refreshToken = Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now) // 토큰 발행 시간 정보
-                .setExpiration(refreshTokenExpirationTime)
-                .signWith(SignatureAlgorithm.HS256, refreshSecretKey)
-                .compact();
+        return Jwts.builder()
+            .setClaims(setClaims(memberId))
+            .setIssuedAt(now) // 토큰 발행 시간 정보
+            .setExpiration(refreshTokenExpirationTime)
+            .signWith(SignatureAlgorithm.HS256, refreshSecretKey)
+            .compact();
+    }
 
+    public MemberResponseDto.TokenInfo generateToken(Long memberId) {
+        String accessToken = generateAccessToken(memberId);
+        String refreshToken = generateRefreshToken(memberId);
         return new MemberResponseDto.TokenInfo(accessToken, refreshToken);
+    }
+
+    public Claims setClaims(Long memberId) {
+        Claims claims = Jwts.claims();
+        claims.put("memberId", memberId);
+
+        return claims;
     }
 
     public Authentication getAuthentication(String token) {
