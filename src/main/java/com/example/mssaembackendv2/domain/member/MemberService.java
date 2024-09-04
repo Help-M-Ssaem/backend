@@ -67,7 +67,7 @@ public class MemberService {
     public Member register(RegisterMember registerMember) {
         Member member = new Member(
                 registerMember.getEmail(),
-                registerMember.getNickname(),
+                registerMember.getNickName(),
                 registerMember.getMbti(),
                 registerMember.getCaseSensitivity());
         save(member);
@@ -113,7 +113,7 @@ public class MemberService {
         if (flag) {
             throw new BaseException(MemberErrorCode.DUPLICATE_MEMBER);
         }
-        flag = memberRepository.existsByNickName(registerMember.getNickname());
+        flag = memberRepository.existsByNickName(registerMember.getNickName());
         if (flag) {
             throw new BaseException(MemberErrorCode.DUPLICATE_NICKNAME);
         }
