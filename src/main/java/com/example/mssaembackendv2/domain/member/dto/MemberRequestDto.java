@@ -3,6 +3,7 @@ package com.example.mssaembackendv2.domain.member.dto;
 import com.example.mssaembackendv2.domain.mbti.MbtiEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class MemberRequestDto {
     @AllArgsConstructor
     public static class RegisterMember {
         @NotBlank(message = "이메일 형식이 아닙니다.")
-        @Email(message = "이메일 형식이 아닙니다.")
+        @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "이메일 형식이 아닙니다.")
         private String email;
         @NotBlank(message = "닉네임은 공백일 수 없습니다.")
         private String nickName;
