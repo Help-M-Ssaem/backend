@@ -77,7 +77,7 @@ public class DiscussionService {
 
     // 홈 화면 - 최상위 제외한 HOT 토론글 2개만 조회
     public List<DiscussionSimpleInfo> findHotDiscussionsForHome(Member member) {
-        PageRequest pageRequest = PageRequest.of(0, 3);
+        PageRequest pageRequest = PageRequest.of(0, 5);
         List<Discussion> discussions = findHotDiscussions(pageRequest)
             .stream().collect(Collectors.toList());
 
