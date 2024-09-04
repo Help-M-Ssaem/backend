@@ -25,7 +25,7 @@ public class MemberRequestDto {
         @Email(message = "이메일 형식이 아닙니다.")
         private String email;
         @NotBlank(message = "닉네임은 공백일 수 없습니다.")
-        private String nickname;
+        private String nickName;
         private MbtiEnum mbti;
         @NotBlank(message = "mbti를 골라주세요.")
         private String caseSensitivity; //대소문자 구분
