@@ -58,10 +58,12 @@ public class MemberService {
     private final GoogleSocialLoginService googleSocialLoginService;
     private final NaverSocialLoginService naverSocialLoginService;
 
+    @Transactional
     public void save(Member member) {
         memberRepository.save(member);
     }
 
+    @Transactional
     public Member register(RegisterMember registerMember) {
         Member member = new Member(
                 registerMember.getEmail(),
@@ -72,6 +74,7 @@ public class MemberService {
         return member;
     }
 
+    @Transactional
     public TokenInfo registerMember(RegisterMember registerMember) {
         checkRegister(registerMember);
         Member member = register(registerMember);
@@ -82,6 +85,7 @@ public class MemberService {
         return tokenInfo;
     }
 
+    @Transactional
     public TokenInfo socialLogin(SocialLoginType socialLoginType,
         SocialLoginToken socialLoginToken) throws BaseException, IOException {
         String idToken = socialLoginToken.getIdToken();
@@ -144,6 +148,7 @@ public class MemberService {
         return teacherInfos;
     }
 
+    @Transactional
     public String modifyProfile(Member member, ModifyProfile modifyProfile) {
         // 대표 뱃지 변경
         String badgeName = badgeService.changeRepresentativeBadge(member, modifyProfile.getBadgeId());
@@ -171,9 +176,12 @@ public class MemberService {
     }
 
     public TokenInfo refreshAccessToken(Member member) {
+        String refreshToken = jwtTokenProvider.generateRefreshToken(member.getId());
+        member.changeRefreshToken(refreshToken);
+        save(member);
         return TokenInfo.builder()
                 .accessToken(jwtTokenProvider.generateAccessToken(member.getId()))
-                .refreshToken(member.getRefreshToken())
+                .refreshToken(refreshToken)
                 .build();
     }
 
